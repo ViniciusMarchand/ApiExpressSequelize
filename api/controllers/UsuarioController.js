@@ -1,11 +1,25 @@
 const database = require('../models');
 
-class UsuarioController{
-    static async pegaTodosOsUsuarios(req, res){
-        try{
+class UsuarioController {
+    static async pegaTodosOsUsuarios(req, res) {
+        try {
             const todosOsUsuarios = await database.usuario.findAll();
             return res.status(200).json(todosOsUsuarios);
-        }catch (error){
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async pegaUmUsuario(req, res) {
+        const { id } = req.params;
+        try {
+            const umUsuario = await database.usuario.findOne({
+                where: {
+                    id: Number(id)
+                }
+            })
+            return res.status(200).json(umUsuario)
+        } catch (error) {
             return res.status(500).json(error.message)
         }
     }
