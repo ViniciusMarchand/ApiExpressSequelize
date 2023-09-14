@@ -1,60 +1,61 @@
 const database = require('../models');
 
-class AlimentoController {
-    static async pegaTodosAlimentos(req, res) {
+class ItemProdutoController {
+    static async pegaTodosItensProdutos(req, res) {
         try {
-            const todosOsAlimentos = await database.alimento.findAll();
-            return res.status(200).json(todosOsAlimentos);
+            const todosOsItens = await database.item_produto.findAll();
+            return res.status(200).json(todosOsItens);
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
 
-    static async pegaUmAlimento(req, res) {
+    static async pegaUmItemProduto(req, res) {
         const { id } = req.params;
         try {
-            const umAlimento = await database.alimento.findOne({
+            const umItemProduto = await database.item_produto.findOne({
                 where: {
                     id: Number(id)
                 }
             })
-            return res.status(200).json(umAlimento)
+            return res.status(200).json(umItemProduto)
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    static async criaAlimento(req, res) {
-        const novoAlimento = req.body;
+    static async criaItemProduto(req, res) {
+        const novoItemProduto = req.body;
         try {
-            const novoAlimentoCriado = await database.alimento.create(novoAlimento)
-            return res.status(200).json(novoAlimento);
+            const novoItemProdutoCriado = await database.item_produto.create(novoItemProduto)
+            return res.status(200).json(novoItemProdutoCriado);
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    static async atualizaAlimento(req, res) {
+    
+    static async atualizaItemProduto(req, res) {
         const { id } = req.params;
         const novaInfos = req.body;
         try {
-            await database.alimento.update(novaInfos, {
+            await database.item_produto.update(novaInfos, {
                 where: {
                     id: Number(id)
                 }
             })
-            const alimentoAtualizado = await database.alimento.findOne({
+            const itemProdutoAtualizado = await database.item_produto.findOne({
                 where: {
                     id: Number(id)
                 }
             })
-            return res.status(200).json(alimentoAtualizado);
+            return res.status(200).json(itemProdutoAtualizado);
         } catch (error) {
             return res.status(500).json(error.message)
         }
     }
-    static async apagaAlimento(req, res){
+    static async apagaItemProduto(req, res){
         const {id} = req.params;
         try {
-            await database.alimento.destroy({
+            await database.item_produto.destroy({
                 where: {
                     id: Number(id)
                 }
@@ -67,4 +68,4 @@ class AlimentoController {
 }
 
 
-module.exports = AlimentoController;
+module.exports = ItemProdutoController;

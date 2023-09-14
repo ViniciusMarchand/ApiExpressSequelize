@@ -10,6 +10,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      // alimento.hasMany(models.item_alimento, {
+      //   foreignKey: 'alimento_id'
+      // })
+
+      // alimento.belongsTo(models.usuario, {
+      //   foreignKey: 'usuario_id'
+      // });
 
     }
   }
@@ -27,10 +34,6 @@ module.exports = (sequelize, DataTypes) => {
     porcao: DataTypes.STRING(10),
     peso: DataTypes.STRING(10),
     acucar_adicionais: DataTypes.STRING,
-
-
-
-
 
   }, {
     sequelize,
