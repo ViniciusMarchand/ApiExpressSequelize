@@ -13,25 +13,29 @@ module.exports = (sequelize, DataTypes) => {
       usuario.hasMany(models.produto, {
         foreignKey: 'usuario_id'
       });
-      // usuario.hasMany(models.alimento, {
-      //   foreignKey: 'usuario_id'
-      // });
-      // usuario.hasMany(models.item_produto, {
-      //   foreignKey: 'usuario_id'
-      // });
-      // usuario.hasMany(models.item_alimento, {
-      //   foreignKey: 'usuario_id'
-      // });
-      
+      usuario.hasMany(models.alimento, {
+        foreignKey: 'usuario_id'
+      });
+      usuario.hasMany(models.item_produto, {
+        foreignKey: 'usuario_id'
+      });
+      usuario.hasMany(models.item_alimento, {
+        foreignKey: 'usuario_id'
+      });
     }
   }
   usuario.init({
-    nome: DataTypes.STRING(255),
-    email: DataTypes.STRING(255),
-    senha: DataTypes.STRING(20),
+    nome: DataTypes.STRING,
+    email: DataTypes.STRING,
+    senha: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'usuario',
+    defaultScope: {
+      attributes:{
+        exclude:['senha']
+      }
+    },
     timestamps: false,
     createdAt: false,
     updatedAt: false,
